@@ -61,15 +61,29 @@ Cat.update(oldValue,newData2,function(err,result){
     }
 
 });
-//var kitty = new Cat({ name: 'liushuangww' });
-//
-//kitty.age = 20;
-//kitty.save(function (err) {
-//    if (err) {
-//        console.log(err);
-//    } else {
-//        console.log('meow');
-//    }
-//});
+
+//插入数据
+// 连接数据库
+var db = mongoose.createConnection('mongodb://127.0.0.1:27017/test');
+// 设置数据类型
+var monSchema = new mongoose.Schema({
+    name:{type:String,default:"username"},
+    age:{type:Number},
+    sex:{type:String}
+});
+// 选择集合
+var monModel = db.model('user',monSchema);
+// 数据集
+var content = {name:"Nick",age:23,sex:'男'};
+// 实例化对象并插入数据
+var monInsert = new monModel(content);
+monInsert.save(function(err){
+    if(err){
+        console.log(err);
+    }else{
+        console.log('成功插入数据');
+    }
+    db.close();
+});
 
 
