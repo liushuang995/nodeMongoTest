@@ -1,0 +1,31 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "keywords": [
+    "123123"
+  ],
+  "author": "liushuang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongodb": "^2.2.10",
+    "mongoose": "^4.6.4"
+  },
+  "description": "'myTest'",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liushuang995/nodeMongoTest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liushuang995/nodeMongoTest/issues"
+  },
+  "homepage": "https://github.com/liushuang995/nodeMongoTest#readme"
+}
