@@ -12,7 +12,7 @@ gulp.task('sass', function () {
     return gulp.src('static/scss/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(minifyCSS())
-        .pipe(gulp.dest('static/css'));
+        .pipe(gulp.dest('dest/css'));
 });
 
 gulp.task('sass:watch',function (){
@@ -23,7 +23,7 @@ gulp.task('jsuglify', function () {
     return gulp.src('*.js')
         .pipe(jshint().on('error', sass.logError))
         .pipe(uglify().on('error', sass.logError))
-        .pipe(gulp.dest('modules/js'));
+        .pipe(gulp.dest('dest/js'));
 });
 
 gulp.task('default',['sass']);

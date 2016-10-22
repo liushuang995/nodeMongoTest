@@ -7,7 +7,7 @@ var app = express();
 var port = 30000;
 app.set('views', './views')
 app.set('view engine', 'ejs');
-app.use(express.static('static'))
+app.use(express.static('dest'))
 app.get('/', function(req, res){
     res.render('index', { title: '测试代码' });
 });
