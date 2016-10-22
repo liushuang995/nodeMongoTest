@@ -70,5 +70,5 @@ var close = function (){
     })
 }
 //save('李学文',26,'人妖');
-//find('李学文')
+find('李学文')
 //update({_id:'5808816b442c792293428896'},{$set:{name:'李学文',age:2,sex:"男"}});

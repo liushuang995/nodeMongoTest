@@ -11,7 +11,8 @@ $margin: 16px;
   top:$margin*3;
   position: absolute;
   padding: $margin / 2;
-  margin: $margin / 2;
-  border:$margin / 16 solid $blue;
+  margin: auto;
+  border:$margin / 8 solid $blue;
+  border-radius:$margin;
   font-size: $margin*3;
 }

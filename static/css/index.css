@@ -1,11 +1,1 @@
-.content {
-  border-color: #3bbfce;
-  color: #2ca2af; }
-
-.border {
-  top: 48px;
-  position: absolute;
-  padding: 8px;
-  margin: 8px;
-  border: 1px solid #3bbfce;
-  font-size: 48px; }
+.content{border-color:#3bbfce;color:#2ca2af}.border{top:48px;position:absolute;padding:8px;margin:auto;border:2px solid #3bbfce;border-radius:16px;font-size:48px}
