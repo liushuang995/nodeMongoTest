@@ -2,24 +2,20 @@
  * Created by liushuang on 16/10/20.
  */
 var mongoose = require('mongoose');
+var collectionName = 'actor';
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/mydb');
 var schema = new mongoose.Schema({
     name:{type:String,default:"username"},
     age:{type:Number},
     sex:{type:String}
-}, { collection: 'actor' });
+}, { collection: collectionName });
 
-// or
+schema.set('collection', collectionName);
 
-schema.set('collection', 'actor');
-
-// or
-
-var collectionName = 'actor'
 var Actors = mongoose.model('Actor', schema, collectionName);
-
-var save = function(name,age,sex){
+var db = {};
+db.save = function(name,age,sex){
     var content = {name:name||"Shuang Liu",age:age||23,sex:sex||'男'};
     var ActorsInsert = new Actors(content);
     ActorsInsert.save(function(err){
@@ -28,10 +24,10 @@ var save = function(name,age,sex){
         }else{
             console.info('saved');
         }
-        close();
+        db.close();
     })
 }
-var find = function(name){
+db.find = function(name,callback){
     var content = {name:name};
     var field = {name:1,age:1,sex:1};
     Actors.find(content,field,function(err,result){
@@ -39,12 +35,13 @@ var find = function(name){
             console.log(err);
         }else{
             console.log(result);
+            callback(result)
         }
-        close();
+        db.close();
     });
 }
 
-var update = function(oldValue,newData2){
+db.update = function(oldValue,newData2){
     //var oldValue  = {age:20};
     // 单条件更新
     var newData1 = {$set:{name:"内容"}};
@@ -56,19 +53,29 @@ var update = function(oldValue,newData2){
         }else{
             console.log("update");
         }
-        close();
+        db.close();
     });
 }
 
-var remove = function(){
-
+db.remove = function(content){
+    Actors.remove(content, function(error){
+        if(error) {
+            console.log(error);
+        } else {
+            console.log('delete ok!');
+        }
+        //关闭数据库链接
+        db.close();
+    })
 }
-
-var close = function (){
+db.close = function (){
     mongoose.connection.close(function(){
         console.log('closed')
     })
 }
+
+module.exports = db;
+
 //save('李学文',26,'人妖');
-find('李学文')
+//find('李学文')
 //update({_id:'5808816b442c792293428896'},{$set:{name:'李学文',age:2,sex:"男"}});
