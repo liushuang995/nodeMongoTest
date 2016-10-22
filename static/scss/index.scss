@@ -2,13 +2,14 @@ $blue: #3bbfce;
 
 $margin: 16px;
 
-.content-navigation {
+.content{
   border-color: $blue;
   color:darken($blue, 9%);
 }
 
 .border {
   top:$margin*3;
+  position: absolute;
   padding: $margin / 2;
   margin: $margin / 2;
   border:$margin / 16 solid $blue;
