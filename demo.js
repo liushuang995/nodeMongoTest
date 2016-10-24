@@ -14,13 +14,14 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
 
-//app.use(sass({
-//    src: path.join(__dirname, 'static'),
-//    dest: path.join(__dirname, 'static'),
-//    indentedSyntax: true,
-//    sourceMap: true
-//}));
-app.use(express.static(path.join(__dirname, 'dest')));
+app.use(sass({
+    src: path.join(__dirname, 'static/scss'),
+    dest: path.join(__dirname, 'static'),
+    debug: true,
+    outputStyle: 'compressed',
+    prefix:  '/prefix'
+}));
+app.use(express.static(path.join(__dirname, 'static')));
 //app.use(express.static('dest'))
 app.get('/', function(req, res) {
     mongoose.connect(DB_URL);
