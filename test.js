@@ -1,10 +1,8 @@
 /**
  * Created by liushuang on 16/10/20.
  */
-var mongoose = require('mongoose');
+var mongoose = require('./test/connect.js');
 var collectionName = 'actor';
-mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/mydb');
 var schema = new mongoose.Schema({
     name:{type:String,default:"username"},
     age:{type:Number},
@@ -13,8 +11,9 @@ var schema = new mongoose.Schema({
 
 schema.set('collection', collectionName);
 
-var Actors = mongoose.model('Actor', schema, collectionName);
+var Actors;
 var db = {};
+Actors = mongoose.model('Actor', schema, collectionName);
 db.save = function(name,age,sex){
     var content = {name:name||"Shuang Liu",age:age||23,sex:sex||'男'};
     var ActorsInsert = new Actors(content);
@@ -24,7 +23,6 @@ db.save = function(name,age,sex){
         }else{
             console.info('saved');
         }
-        db.close();
     })
 }
 db.find = function(name,callback){
@@ -37,7 +35,6 @@ db.find = function(name,callback){
             console.log(result);
             callback(result)
         }
-        db.close();
     });
 }
 
@@ -53,7 +50,6 @@ db.update = function(oldValue,newData2){
         }else{
             console.log("update");
         }
-        db.close();
     });
 }
 
@@ -64,13 +60,6 @@ db.remove = function(content){
         } else {
             console.log('delete ok!');
         }
-        //关闭数据库链接
-        db.close();
-    })
-}
-db.close = function (){
-    mongoose.connection.close(function(){
-        console.log('closed')
     })
 }
 

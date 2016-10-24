@@ -3,18 +3,36 @@
  */
 var express = require('express');
 var path = require('path');
+var logger = require('morgan');
+var mongoose = require('mongoose');
+var sass = require('node-sass-middleware');
 var db = require('./test');
 var app = express();
 var port = 30000;
-app.set('views', './views')
+var DB_URL = 'mongodb://localhost:27017/mydb';
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
-app.use(express.static('dest'))
+app.use(logger('dev'));
+
+//app.use(sass({
+//    src: path.join(__dirname, 'static'),
+//    dest: path.join(__dirname, 'static'),
+//    indentedSyntax: true,
+//    sourceMap: true
+//}));
+app.use(express.static(path.join(__dirname, 'dest')));
+//app.use(express.static('dest'))
 app.get('/', function(req, res) {
+    mongoose.connect(DB_URL);
     db.find('李学文',function(data){
-        res.send(data)
+        res.render('index', {
+            title: data[0].age
+        });
     })
+    mongoose.connection.close()
     //console.log(db.find)
     //res.render(_reqUrl, { title: _reqUrl });
 });
+
 app.listen(port);
-console.log('Http Server running at http://localhost:' + port + '/');
+//console.log('Http Server running at http://localhost:' + port + '/');
