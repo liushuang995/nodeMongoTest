@@ -25,10 +25,9 @@ app.use(express.static(path.join(__dirname, 'static')));
 //app.use(express.static('dest'))
 app.get('/', function(req, res) {
     mongoose.connect(DB_URL);
-    db.find('李学文',function(data){
-        res.render('index', {
-            title: data[0].age
-        });
+    db.find('1',function(data){
+        console.log(data)
+        res.render('index');
     })
     mongoose.connection.close()
     //console.log(db.find)
