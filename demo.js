@@ -25,13 +25,12 @@ app.use(express.static(path.join(__dirname, 'static')));
 //app.use(express.static('dest'))
 app.get('/', function(req, res) {
     mongoose.connect(DB_URL);
-    db.find('1',function(data){
+    db.find('李学文',function(data){
         console.log(data)
-        res.render('index');
+        res.render('index', { title: data[0].age });
     })
     mongoose.connection.close()
-    //console.log(db.find)
-    //res.render(_reqUrl, { title: _reqUrl });
+
 });
 
 app.listen(port);

@@ -32,7 +32,7 @@ db.find = function(name,callback){
         if(err){
             console.log(err);
         }else{
-            console.log(result);
+            console.log(1,result);
             callback(result)
         }
     });
